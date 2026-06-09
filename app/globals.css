@@ -1,0 +1,283 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --obsidian: #0A0806;
+  --gold: #C8A96E;
+  --gold-light: #E8C98E;
+  --gold-dark: #A08848;
+  --cream: #F2EDE4;
+  --stone: #8A7968;
+  --dark-border: #2A2318;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: var(--obsidian);
+  color: var(--cream);
+  cursor: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom selection */
+::selection {
+  background-color: rgba(200, 169, 110, 0.3);
+  color: var(--cream);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--obsidian);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--stone);
+}
+
+/* Gold divider line */
+.gold-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+/* Thin gold line */
+.gold-line {
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+/* Text reveal container */
+.text-reveal {
+  overflow: hidden;
+}
+
+/* Collection card gradients */
+.card-rings {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 28%, rgba(200,169,110,0.25) 29%, rgba(200,169,110,0.08) 38%, transparent 39%),
+    radial-gradient(ellipse at 50% 60%, rgba(200,169,110,0.06) 0%, transparent 55%),
+    linear-gradient(160deg, #1c1509 0%, #0a0806 100%);
+}
+
+.card-necklaces {
+  background:
+    linear-gradient(180deg, rgba(200,169,110,0.0) 0%, rgba(200,169,110,0.12) 30%, rgba(200,169,110,0.04) 60%, transparent 100%),
+    radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.15) 0%, transparent 60%),
+    linear-gradient(180deg, #0f0d0a 0%, #0a0806 100%);
+}
+
+.card-bracelets {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(200,169,110,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(200,169,110,0.1) 0%, transparent 50%),
+    linear-gradient(180deg, #12100c 0%, #0a0806 100%);
+}
+
+.card-earrings {
+  background:
+    radial-gradient(circle at 35% 25%, rgba(200,169,110,0.2) 0%, transparent 20%),
+    radial-gradient(circle at 65% 25%, rgba(200,169,110,0.2) 0%, transparent 20%),
+    linear-gradient(180deg, #141108 0%, #0a0806 100%);
+}
+
+/* Featured ring artwork */
+.ring-artwork {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 32%, rgba(200,169,110,0.4) 33%, rgba(180,145,85,0.15) 43%, transparent 44%),
+    conic-gradient(from 0deg at 50% 50%,
+      rgba(200,169,110,0.0) 0deg,
+      rgba(200,169,110,0.3) 45deg,
+      rgba(255,220,150,0.5) 90deg,
+      rgba(200,169,110,0.3) 135deg,
+      rgba(200,169,110,0.0) 180deg,
+      rgba(200,169,110,0.1) 225deg,
+      rgba(150,110,60,0.3) 270deg,
+      rgba(200,169,110,0.1) 315deg,
+      rgba(200,169,110,0.0) 360deg
+    ),
+    radial-gradient(circle at 50% 50%, rgba(200,169,110,0.05) 0%, transparent 70%),
+    linear-gradient(180deg, #1a1408 0%, #0a0806 100%);
+}
+
+/* Hero glow */
+.hero-glow {
+  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(200,169,110,0.12) 0%, rgba(200,169,110,0.05) 40%, transparent 70%);
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Corner brackets */
+.bracket-tl::before,
+.bracket-tl::after,
+.bracket-tr::before,
+.bracket-tr::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: rgba(200, 169, 110, 0.5);
+  border-style: solid;
+}
+
+.bracket-tl::before {
+  top: 32px;
+  left: 32px;
+  border-width: 1px 0 0 1px;
+}
+
+.bracket-tl::after {
+  bottom: 32px;
+  left: 32px;
+  border-width: 0 0 1px 1px;
+}
+
+/* Floating nav border on scroll */
+.nav-scrolled {
+  background: rgba(10, 8, 6, 0.85) !important;
+  border-bottom: 1px solid rgba(200, 169, 110, 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+/* Hamburger menu */
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* Gold CTA button */
+.btn-gold {
+  border: 1px solid rgba(200, 169, 110, 0.6);
+  color: var(--gold);
+  font-family: var(--font-montserrat);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.625rem 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-gold:hover::before {
+  transform: translateX(0);
+}
+
+.btn-gold:hover {
+  color: var(--obsidian);
+}
+
+.btn-gold span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Footer input */
+.newsletter-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(200, 169, 110, 0.3);
+  color: var(--cream);
+  font-family: var(--font-montserrat);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 0;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+.newsletter-input::placeholder {
+  color: var(--stone);
+}
+
+.newsletter-input:focus {
+  border-color: var(--gold);
+}
+
+/* Scroll indicator animation */
+@keyframes scrollDrop {
+  0% { transform: translateY(-4px); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(8px); opacity: 0; }
+}
+
+.scroll-dot {
+  animation: scrollDrop 2s ease-in-out infinite;
+}
+
+/* Utility */
+.font-small-caps {
+  font-variant: small-caps;
+}
