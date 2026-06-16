@@ -2,17 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
-  { label: 'Collections', href: '#collections' },
-  { label: 'Craftsmanship', href: '#craftsmanship' },
-  { label: 'About', href: '#about' },
-  { label: 'Bespoke', href: '#bespoke' },
+  { label: 'Collections',   href: '/#collections'   },
+  { label: 'Craftsmanship', href: '/#craftsmanship' },
+  { label: 'About',         href: '/#about'         },
+  { label: 'Create',        href: '/create'         },
 ];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,11 +26,13 @@ export default function Navigation() {
   }, []);
 
   const handleNavClick = (e, href) => {
-    e.preventDefault();
-    setMenuOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith('/#') && pathname === '/') {
+      e.preventDefault();
+      setMenuOpen(false);
+      const target = document.querySelector(href.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setMenuOpen(false);
     }
   };
 
@@ -56,14 +61,18 @@ export default function Navigation() {
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="font-montserrat text-stone hover:text-cream transition-colors duration-300 font-small-caps tracking-widest text-xs uppercase"
+                className={`font-montserrat transition-colors duration-300 font-small-caps tracking-widest text-xs uppercase ${
+                  pathname === '/create' && link.href === '/create'
+                    ? 'text-gold'
+                    : 'text-stone hover:text-cream'
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -105,21 +114,24 @@ export default function Navigation() {
             <div className="gold-divider absolute top-20 left-0 right-0" />
             <nav className="flex flex-col items-center gap-10">
               {navLinks.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="font-cormorant text-cream text-5xl font-light hover:text-gold transition-colors duration-300 tracking-wide"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + i * 0.08 }}
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="font-cormorant text-cream text-5xl font-light hover:text-gold transition-colors duration-300 tracking-wide"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
               <motion.a
-                href="#bespoke"
-                onClick={(e) => handleNavClick(e, '#bespoke')}
+                href="/#bespoke"
+                onClick={(e) => handleNavClick(e, '/#bespoke')}
                 className="mt-4 btn-gold"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

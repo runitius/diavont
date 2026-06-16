@@ -281,3 +281,28 @@ body {
 .font-small-caps {
   font-variant: small-caps;
 }
+
+/* Carat slider — invisible but functional, overlaid on custom track */
+.carat-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: none;
+}
+.carat-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  cursor: none;
+}
+.carat-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: none;
+}
+
+/* bg-gold/8 utility */
+.bg-gold\/8 { background-color: rgba(200,169,110,0.08); }
